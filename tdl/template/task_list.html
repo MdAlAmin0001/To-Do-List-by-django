@@ -1,0 +1,52 @@
+{% extends "home.html" %}
+
+{% block content %}
+    <h1>My To-Do List</h1>
+    <a href="{% url 'task_create' %}"><button type="button" class="btn btn-primary">Create New Task</button></a>
+
+    <!-- Priority Filter -->
+    
+        <div class="filter-form">
+            <label>Priority:</label>
+            <a href="{% url 'task_list' %}">All</a>
+            <a href="{% url 'task_filter_by_priority' 'HIGH' %}" {% if request.GET.priority == "HIGH" %}class="active"{% endif %}>High</a>
+            <a href="{% url 'task_filter_by_priority' 'MEDIUM' %}" {% if request.GET.priority == "MEDIUM" %}class="active"{% endif %}>Medium</a>
+            <a href="{% url 'task_filter_by_priority' 'LOW' %}" {% if request.GET.priority == "LOW" %}class="active"{% endif %}>Low</a>
+        </div>
+
+        <div class="filter-form">
+            <label for="due_date">Due Date:</label>
+            <input type="date" id="due_date" name="due_date" value="{% if request.GET.due_date %}{{ request.GET.due_date }}{% endif %}">
+            <button type="button" onclick="applyDateFilter()">Apply Date Filter</button>
+        </div>
+        
+        <script>
+            function applyDateFilter() {
+                var dueDate = document.getElementById('due_date').value;
+                window.location.href = "{% url 'task_filter_by_date' %}?due_date=" + dueDate;
+            }
+        </script>
+
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
+                <span class="due-date">Due: {{ task.due_date }}</span>
+                <span class="priority">{{ task.priority }}</span>
+                
+                    {% if task.is_completed %}
+                    <i class="fa-regular fa-circle-check"></i>
+                    {% endif %}
+                
+                    {% if not task.is_completed %}
+                    <a href="{% url 'taskcomplete' task.id %}"><i class="fa-regular fa-circle"></i></a> </li>
+                    {% endif %}
+
+
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
+
+
+

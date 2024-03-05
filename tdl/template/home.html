@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My To-Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        /* Basic navbar styling */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f2f2f2;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar li {
+    display: inline-block;
+    margin-right: 15px;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .navbar a:hover {
+    color: #007bff;
+  }
+  
+  /* Optional dropdown menu (if included) */
+  .navbar .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .navbar .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .navbar .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .navbar .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  /* Hero section styling */
+.hero {
+    padding: 50px 0;
+    text-align: center;
+    background-color: #f5f5f5;
+  }
+  
+  .hero h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 1.1em;
+    line-height: 1.5;
+  }
+  
+  .hero .benefits {
+    margin: 20px 0;
+    padding: 10px;
+    list-style: none;
+  }
+  
+  .hero .benefits li {
+    margin-bottom: 5px;
+  }
+  
+  .hero .button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .hero .button:hover {
+    background-color: #0062cc;
+  }
+  
+  /* How-it-works section styling */
+  .how-it-works {
+    padding: 30px;
+  }
+  
+  .how-it-works h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  
+  .how-it-works ol {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .how-it-works li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+  /* Basic formatting */
+h1, p {
+    margin: 0.5rem 0;
+  }
+  
+  p:first-of-type {
+    font-weight: bold;
+  }
+  
+  /* Button styling */
+  .btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+    color: #fff;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  /* Other styling */
+  input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  a.create-new-task {
+    display: block;
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #4CAF50; /* Adjust link color if desired */
+    font-weight: bold;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .due-date,
+  .priority,
+  .completed {
+    margin-left: 1rem;
+  }
+  
+  .due-date {
+    font-weight: lighter;
+  }
+  
+  .priority {
+    color: red; /* adjust color based on priority value */
+  }
+  
+  .completed input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+  
+  /* Base styles */
+form {
+    margin: 1rem auto;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5; /* Adjust background color if desired */
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* For each form field */
+  .form-row {
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  select {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1rem;
+  }
+  
+  input[type="submit"] {
+    background-color: #4CAF50; /* Adjust button color if desired */
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Error messages */
+  .error {
+    color: red;
+    font-size: smaller;
+  }
+  
+  footer {
+    /* Basic formatting */
+    text-align: center;
+    padding: 1rem; /* Adjust padding as needed */
+    background-color: #f5f5f5; /* Change background color if desired */
+    color: #333; /* Change text color if desired */
+  
+    /* Footer position options (choose one) */
+    
+    /* 1. Position at the bottom of the viewport: */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  
+    /* 2. Position at the bottom of the content: */
+    /* margin-top: auto; */
+  
+    /* Optional styling */
+    border-top: 1px solid #ddd;
+  
+  }
+  
+  footer p {
+    margin: 0;
+  }
+
+  
+    </style>
+    
+</head>
+<body>
+  {% include "header.html" %}
+
+{% block content %}
+<main>
+  <section class="task-list">
+    {% if user.is_authenticated %}
+      <h1>Today's Tasks</h1>
+
+      <ul>
+        {% for task in today_tasks %}
+          <li>
+            <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
+            <span class="due-date">Due: {{ task.due_date }}</span>
+            <span class="priority">{{ task.priority }}</span>
+            <span class="completion-indicator">
+              {% if task.is_completed %}
+                    <i class="fa-regular fa-circle-check"></i>
+                    {% endif %}
+                
+                    {% if not task.is_completed %}
+                    <a href="{% url 'taskcomplete' task.id %}"><i class="fa-regular fa-circle"></i></a> </li>
+                    {% endif %}
+            </span>
+            
+          </li>
+        {% endfor %}
+      </ul>
+
+      {% if today_tasks.count == 0 %}
+        <p>You have no tasks scheduled for today. Why not add some?</p>
+      {% endif %}
+    {% else %}
+      <p>Please log in to view your tasks.</p>
+    {% endif %}
+  </section>
+    <section class="hero">
+        <h1>Effortlessly Streamline Your Tasks</h1>
+        <p>
+            Organize your life and boost productivity with our easy-to-use to-do list application.
+            Eliminate stress and achieve your goals by managing your tasks efficiently.
+        </p>
+        <ul class="benefits">
+            <li>Prioritize tasks to focus on what's most important.</li>
+            <li>Set due dates and track deadlines to avoid missed tasks.</li>
+            <li>Mark tasks as completed for a sense of accomplishment.</li>
+            <li>Keep your tasks organized and readily accessible.</li>
+        </ul>
+        {% if user.is_authenticated %}
+        <h2>Why complete Your Daily Tasks</h2>
+        <p>Completing your daily tasks can bring a multitude of benefits to your personal and professional life. Here are some key advantages:</p>
+       
+        <ul class="daily-tasks">
+            <p>Increased Productivity and Efficiency:</p>
+            <li>
+
+                Reduced procrastination: Checking off tasks from your list gives you a sense of accomplishment and motivates you to tackle the next one, creating a momentum of progress.
+                Clear focus and priorities: Having a defined plan for your day helps you prioritize tasks and focus on the most important ones, preventing distractions and wasting time.
+                Improved time management: Knowing what needs to be done allows you to allocate your time effectively, leading to better organization and a feeling of control over your day.
+            </li>
+            <p>Reduced Stress and Improved Well-being:</p>
+            <li>
+
+                Less mental clutter: Keeping track of unfinished tasks can be mentally taxing. Completing them reduces overwhelm and frees up cognitive space for other things.
+                Sense of accomplishment and achievement: Checking off completed tasks reinforces a sense of self-efficacy and boosts your confidence in your abilities.
+                Reduced anxiety and negative self-talk: Feeling on top of your tasks lessens worries about deadlines and missed opportunities, contributing to a calmer and more positive outlook.
+            </li>
+            <p>Personal Growth and Development:</p>
+            <li>
+
+                Goal setting and achievement: Daily tasks are stepping stones towards bigger goals. Completing them builds a sense of discipline and helps you reach your long-term objectives.
+                Confidence and self-esteem: Successfully completing tasks reinforces your abilities and strengthens your belief in yourself, motivating you to take on new challenges.
+                Improved work-life balance: By efficiently managing your tasks, you can free up time to pursue personal interests and spend quality time with loved ones.
+            </li>
+            </ul>
+        <a href="{% url 'task_create' %}" class="button">Create new Task</a>
+        {% else %}
+        <a href="{% url 'signupPage' %}" class="button">Get Started Today!</a>
+        <br>
+        <h2>Why Use This Website?</h2>
+        <p>
+            This website offers a unique and beneficial way to manage your tasks. Here's why you should consider using it:
+            </p>
+            <h2>How It Works</h2>
+            <ol>
+                <li>Sign up for a free account.</li>
+                <li>Create new tasks by adding titles, descriptions, and due dates.</li>
+                <li>Prioritize your tasks to ensure you focus on the most important ones.</li>
+                <li>Mark tasks as completed as you work through them.</li>
+                <li>Track your progress and achieve your goals!</li>
+            </ol>
+        {% endif %}
+    </section>
+
+    <section class="how-it-works">
+        
+    {% if user.is_authenticated %}
+        
+    {% else %}
+        
+        </section>
+    {% endif %}
+</main>
+{% endblock content %}
+
+{% include "footer.html" %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

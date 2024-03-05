@@ -1,0 +1,19 @@
+{% block content %}
+
+<header>
+    <nav class="navbar">
+        <ul>
+            
+            
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'task_list' %}">Tasks</a></li>
+                <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+{% endblock content %}

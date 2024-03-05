@@ -1,0 +1,12 @@
+{% extends "home.html" %}
+{% block content %}
+    <h1>{{ task.title }}</h1>
+    <p>{{ task.description }}</p>
+    <p>Due Date: {{ task.due_date }}</p>
+    <p>Priority: {{ task.priority }}</p>
+    <p>Completed: <input type="checkbox" checked="{{ task.is_completed }}" disabled/></p>
+    <a href="{% url 'task_update' task.pk %}"><button type="button" class="btn btn-info">Edit Task</button></a>
+    <a href="{% url 'task_delete' task.pk %}"><button type="button" class="btn btn-danger">Delete Task</button></a>
+{% endblock content %}
+
+
